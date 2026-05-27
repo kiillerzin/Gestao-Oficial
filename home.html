@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JC Planejados – Móveis Sob Medida | Santos, SP</title>
+<meta name="description" content="Marcenaria JC Planejados em Santos. Móveis sob medida para cozinhas, quartos, banheiros e ambientes comerciais. Peça seu orçamento!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wood-dark: #3B2A1A;
+    --wood-mid: #6B4C2A;
+    --wood-light: #C8A97E;
+    --cream: #F5F0E8;
+    --cream-dark: #EDE5D6;
+    --white: #FDFCFA;
+    --text-dark: #1E1410;
+    --text-mid: #5C4A35;
+    --text-light: #9C8570;
+    --green-accent: #2D4A2D;
+    --green-light: #4A7A4A;
+    --gold: #B8943A;
+    --gold-light: #D4AF6A;
+    --nav-h: 70px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    height: var(--nav-h);
+    background: rgba(253,252,250,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(107,76,42,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(59,42,26,0.1); }
+  .nav-logo {
+    text-decoration: none;
+    display: flex; align-items: center;
+  }
+  .nav-logo img {
+    height: 48px;
+    width: auto;
+    display: block;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-mid);
+    font-size: 0.875rem; font-weight: 500; letter-spacing: 0.04em;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--wood-dark); }
+  .nav-cta {
+    background: var(--green-accent) !important; color: var(--cream) !important;
+    padding: 0.5rem 1.25rem !important; border-radius: 4px !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--green-light) !important; color: var(--cream) !important; }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--wood-dark); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--white); z-index: 999; flex-direction: column; padding: 1.5rem 5%; border-bottom: 1px solid rgba(107,76,42,0.12); box-shadow: 0 8px 32px rgba(59,42,26,0.12); }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { text-decoration: none; color: var(--text-dark); font-size: 1rem; font-weight: 500; padding: 0.85rem 0; border-bottom: 1px solid rgba(107,76,42,0.08); }
+  .mobile-menu a:last-child { border: none; }
+  .mobile-menu .m-cta { margin-top: 1rem; background: var(--green-accent); color: var(--cream) !important; text-align: center; border-radius: 4px; padding: 0.85rem !important; }
+
+  #hero { min-height: 100vh; padding-top: var(--nav-h); position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dark) 100%); }
+  .hero-bg::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 52%; background: var(--wood-dark); clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%); }
+  .hero-content { position: relative; z-index: 2; padding: 4rem 5% 4rem 8%; }
+  .hero-tag { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px; }
+  .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+  .hero-content h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; color: var(--wood-dark); margin-bottom: 1.5rem; }
+  .hero-content h1 em { font-style: italic; color: var(--gold); }
+  .hero-content p { font-size: 1.05rem; color: var(--text-mid); line-height: 1.7; max-width: 420px; margin-bottom: 2.5rem; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--green-accent); color: var(--cream); padding: 0.85rem 1.8rem; border-radius: 4px; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.03em; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .btn-primary:hover { background: var(--green-light); transform: translateY(-2px); }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--wood-dark); padding: 0.85rem 1.8rem; border-radius: 4px; border: 1.5px solid var(--wood-mid); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.03em; text-decoration: none; transition: all 0.2s; }
+  .btn-secondary:hover { background: var(--wood-dark); color: var(--cream); }
+  .hero-image-col { position: relative; z-index: 2; height: 100%; display: flex; align-items: center; justify-content: center; padding: 6rem 8% 6rem 4%; }
+  .hero-img-frame { width: 100%; max-width: 480px; aspect-ratio: 4/5; border-radius: 4px; overflow: hidden; position: relative; box-shadow: 0 32px 80px rgba(0,0,0,0.35); }
+  .hero-img-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center center; transition: transform 6s ease; }
+  .hero-img-frame:hover img { transform: scale(1.04); }
+  .hero-badge { position: absolute; bottom: -20px; left: -20px; background: var(--gold); color: var(--wood-dark); padding: 1.25rem 1.5rem; border-radius: 4px; font-family: 'Cormorant Garamond', serif; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+  .hero-badge .num { font-size: 2rem; font-weight: 700; display: block; line-height: 1; }
+  .hero-badge .lbl { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .hero-stats { position: absolute; right: -10px; top: 40px; background: var(--white); padding: 1rem 1.25rem; border-radius: 4px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); text-align: center; }
+  .hero-stats .num { font-size: 1.5rem; font-weight: 700; color: var(--green-accent); }
+  .hero-stats .lbl { font-size: 0.7rem; color: var(--text-light); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
+
+  section { padding: 6rem 5%; }
+  .section-tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem; }
+  .section-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.15; color: var(--wood-dark); margin-bottom: 1rem; }
+  .section-subtitle { font-size: 1rem; color: var(--text-mid); line-height: 1.7; max-width: 520px; }
+  .section-header { margin-bottom: 3.5rem; }
+  .centered { text-align: center; }
+  .centered .section-tag { justify-content: center; }
+  .centered .section-tag::before { display: none; }
+  .centered .section-subtitle { margin: 0 auto; }
+
+  /* SOBRE */
+  #sobre { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; padding: 6rem 8%; }
+  .sobre-img-wrapper {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(59,42,26,0.15);
+  }
+  .sobre-img-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .sobre-text .highlights { display: flex; gap: 2rem; margin: 2rem 0; flex-wrap: wrap; }
+  .highlight-item { text-align: center; }
+  .highlight-item .val { font-family: 'Cormorant Garamond', serif; font-size: 2.25rem; font-weight: 700; color: var(--gold); display: block; }
+  .highlight-item .key { font-size: 0.78rem; color: var(--text-light); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+  .sobre-text p { color: var(--text-mid); line-height: 1.8; margin-bottom: 1.25rem; }
+  .sobre-text .btn-primary { margin-top: 1rem; }
+
+  /* SERVIÇOS */
+  #servicos { background: var(--white); }
+  .servicos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .servico-card { border: 1px solid rgba(107,76,42,0.12); border-radius: 6px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: default; }
+  .servico-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(59,42,26,0.12); }
+
+  /* Container da imagem do serviço com altura fixa e overflow hidden */
+  .servico-img-container {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+  }
+  .servico-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    transition: transform 0.5s;
+  }
+  .servico-card:hover .servico-img { transform: scale(1.04); }
+
+  /* object-position específico por serviço */
+  .servico-img.img-cozinha  { object-position: center 40%; }
+  .servico-img.img-quarto   { object-position: center 30%; }
+  .servico-img.img-banheiro { object-position: right 30%; }
+  .servico-img.img-sala     { object-position: center top; }
+
+  .servico-body { padding: 1.5rem; }
+  .servico-icon { width: 44px; height: 44px; border-radius: 50%; background: var(--cream); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.3rem; }
+  .servico-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; color: var(--wood-dark); margin-bottom: 0.5rem; }
+  .servico-body p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.65; }
+  .servico-tag { display: inline-block; margin-top: 1rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+
+  /* PORTFÓLIO */
+  #portfolio { background: var(--wood-dark); padding: 6rem 5%; }
+  #portfolio .section-tag { color: var(--gold-light); }
+  #portfolio .section-tag::before { background: var(--gold-light); }
+  #portfolio .section-title { color: var(--cream); }
+  #portfolio .section-subtitle { color: rgba(200,169,126,0.75); }
+
+  .portfolio-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: auto; gap: 12px; margin-top: 3rem; }
+
+  .p-item {
+    overflow: hidden;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+  }
+  /* Imagem preenche 100% do container */
+  .p-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    transition: transform 0.6s;
+  }
+  .p-item:hover img { transform: scale(1.07); }
+
+  /* object-position por item do portfólio */
+  .p-item:nth-child(1) img { object-position: center 40%; }  /* cozinha */
+  .p-item:nth-child(2) img { object-position: center 20%; }  /* closet */
+  .p-item:nth-child(3) img { object-position: center 25%; }  /* quarto */
+  .p-item:nth-child(4) img { object-position: right 25%; } /* banheiro */
+  .p-item:nth-child(5) img { object-position: center top; }  /* sala */
+
+  /* Layout grid do portfólio */
+  .p-item:nth-child(1) { grid-column: 1 / 7; grid-row: 1; height: 360px; }
+  .p-item:nth-child(2) { grid-column: 7 / 13; grid-row: 1; height: 360px; }
+  .p-item:nth-child(3) { grid-column: 1 / 5; grid-row: 2; height: 260px; }
+  .p-item:nth-child(4) { grid-column: 5 / 9; grid-row: 2; height: 260px; }
+  .p-item:nth-child(5) { grid-column: 9 / 13; grid-row: 2; height: 260px; }
+
+  .p-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,20,16,0.85) 0%, transparent 55%); opacity: 0; transition: opacity 0.3s; padding: 1.5rem; display: flex; flex-direction: column; justify-content: flex-end; }
+  .p-item:hover .p-overlay { opacity: 1; }
+  .p-overlay span { font-family: 'Cormorant Garamond', serif; color: var(--cream); font-size: 1.25rem; font-weight: 600; }
+  .p-overlay small { color: var(--gold-light); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  #diferenciais { background: var(--cream-dark); }
+  .diferenciais-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3rem; }
+  .diferencial-item { background: var(--white); padding: 2rem 1.5rem; border-radius: 6px; border-bottom: 3px solid var(--gold); transition: transform 0.25s; }
+  .diferencial-item:hover { transform: translateY(-4px); }
+  .diferencial-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+  .diferencial-item h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--wood-dark); margin-bottom: 0.5rem; }
+  .diferencial-item p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.65; }
+
+  #contato { background: var(--green-accent); padding: 6rem 8%; }
+  #contato .section-tag { color: var(--gold-light); }
+  #contato .section-tag::before { background: var(--gold-light); }
+  #contato .section-title { color: var(--cream); }
+  #contato .section-subtitle { color: rgba(245,240,232,0.75); max-width: 480px; }
+  .contato-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-info-item { display: flex; align-items: flex-start; gap: 1rem; }
+  .contact-icon { width: 44px; height: 44px; min-width: 44px; background: rgba(245,240,232,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .contact-info-item h5 { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.25rem; }
+  .contact-info-item p { color: var(--cream); font-size: 0.95rem; line-height: 1.6; }
+  .contact-info-item a { color: var(--cream); text-decoration: none; }
+  .contact-info-item a:hover { color: var(--gold-light); }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+  .form-group label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,240,232,0.6); }
+  .form-group input, .form-group textarea, .form-group select { background: rgba(245,240,232,0.08); border: 1px solid rgba(245,240,232,0.2); color: var(--cream); padding: 0.75rem 1rem; border-radius: 4px; font-family: 'Outfit', sans-serif; font-size: 0.95rem; transition: border-color 0.2s; outline: none; width: 100%; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(245,240,232,0.3); }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold-light); }
+  .form-group select option { background: var(--green-accent); color: var(--cream); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .btn-whatsapp { display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #fff; padding: 0.9rem 2rem; border-radius: 4px; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.02em; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.2s; justify-content: center; }
+  .btn-whatsapp:hover { background: #1ebe5d; transform: translateY(-2px); }
+
+  footer { background: var(--text-dark); color: var(--cream); padding: 4rem 8% 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--cream); margin-bottom: 1rem; display: block; }
+  .footer-brand p { font-size: 0.88rem; color: rgba(245,240,232,0.55); line-height: 1.7; }
+  .footer-brand .socials { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
+  .social-link { width: 38px; height: 38px; border-radius: 50%; background: rgba(245,240,232,0.08); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1rem; transition: background 0.2s; }
+  .social-link:hover { background: var(--gold); }
+  footer h6 { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 1.25rem; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  footer ul a { text-decoration: none; color: rgba(245,240,232,0.55); font-size: 0.88rem; transition: color 0.2s; }
+  footer ul a:hover { color: var(--cream); }
+  .footer-bottom { border-top: 1px solid rgba(245,240,232,0.08); padding-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
+  .footer-bottom p { font-size: 0.8rem; color: rgba(245,240,232,0.35); }
+
+  .whatsapp-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; width: 58px; height: 58px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px rgba(37,211,102,0.4); text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; font-size: 1.6rem; }
+  .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 10px 36px rgba(37,211,102,0.55); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 960px) {
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-bg::after { display: none; }
+    .hero-bg { background: var(--cream); }
+    .hero-content { padding: 4rem 5% 2rem; }
+    .hero-image-col { padding: 0 5% 4rem; background: var(--wood-dark); }
+    .hero-img-frame { max-width: 100%; }
+    #sobre { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 5%; }
+    .contato-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .p-item:nth-child(1) { grid-column: 1 / 3; height: 280px; }
+    .p-item:nth-child(2) { grid-column: 1 / 2; height: 200px; }
+    .p-item:nth-child(3) { grid-column: 2 / 3; height: 200px; }
+    .p-item:nth-child(4) { grid-column: 1 / 2; height: 200px; }
+    .p-item:nth-child(5) { grid-column: 2 / 3; height: 200px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 4rem 4%; }
+    .hero-content h1 { font-size: 2.2rem; }
+    .hero-btns { flex-direction: column; }
+    .sobre-text .highlights { gap: 1.25rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .p-item:nth-child(1), .p-item:nth-child(2), .p-item:nth-child(3), .p-item:nth-child(4), .p-item:nth-child(5) { grid-column: 1 / 2; height: 220px; grid-row: auto; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .contato-grid { gap: 2rem; }
+    #contato { padding: 4rem 4%; }
+    #sobre { padding: 4rem 4%; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">
+    <img src="logo.png" alt="JC Planejados">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#portfolio">Portfólio</a></li>
+    <li><a href="#contato" class="nav-cta">Pedir Orçamento</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#sobre" onclick="closeMobile()">Sobre Nós</a>
+  <a href="#servicos" onclick="closeMobile()">Serviços</a>
+  <a href="#portfolio" onclick="closeMobile()">Portfólio</a>
+  <a href="#diferenciais" onclick="closeMobile()">Diferenciais</a>
+  <a href="#contato" class="m-cta" onclick="closeMobile()">Pedir Orçamento</a>
+</div>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content reveal">
+    <p class="hero-tag">Marcenaria em Santos, SP</p>
+    <h1>Móveis que contam a sua <em>história</em></h1>
+    <p>Criamos ambientes únicos com móveis planejados sob medida. Da cozinha ao quarto, cada detalhe pensado para o seu estilo de vida.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/5513981338833?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." class="btn-primary" target="_blank" rel="noopener">
+        💬 Pedir Orçamento
+      </a>
+      <a href="#portfolio" class="btn-secondary">Ver Portfólio →</a>
+    </div>
+  </div>
+  <div class="hero-image-col">
+    <div class="hero-img-frame reveal" style="transition-delay:0.2s">
+      <img src="empe2.png" alt="Cozinha planejada JC Planejados">
+      <div class="hero-badge">
+        <span class="num">10+</span>
+        <span class="lbl">Anos de<br>Experiência</span>
+      </div>
+      <div class="hero-stats">
+        <div class="num">500+</div>
+        <div class="lbl">Projetos<br>Entregues</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="sobre-img-wrapper reveal">
+    <img src="4img.png" alt="JC Planejados – trabalhos realizados">
+  </div>
+  <div class="sobre-text reveal" style="transition-delay:0.15s">
+    <div class="section-tag">Quem somos</div>
+    <h2 class="section-title">Tradição e precisão em cada projeto</h2>
+    <div class="highlights">
+      <div class="highlight-item"><span class="val">10+</span><span class="key">Anos no mercado</span></div>
+      <div class="highlight-item"><span class="val">500+</span><span class="key">Clientes felizes</span></div>
+      <div class="highlight-item"><span class="val">100%</span><span class="key">Sob medida</span></div>
+    </div>
+    <p>A <strong>JC Planejados</strong> é uma marcenaria com sede em Santos, dedicada à confecção de móveis sob medida e projetos de marcenaria tradicional. Atendemos toda a região da Baixada Santista com atendimento personalizado e foco total na qualidade.</p>
+    <p>Nosso diferencial está no relacionamento direto com cada cliente: ouvimos suas necessidades, planejamos cada detalhe e entregamos móveis que transformam o seu espaço.</p>
+    <a href="https://wa.me/5513981338833?text=Quero%20saber%20mais%20sobre%20a%20JC%20Planejados!" class="btn-primary" target="_blank" rel="noopener">Fale Conosco</a>
+  </div>
+</section>
+
+<section id="servicos">
+  <div class="section-header centered">
+    <div class="section-tag">O que fazemos</div>
+    <h2 class="section-title">Nossos Serviços</h2>
+    <p class="section-subtitle">Soluções completas em marcenaria planejada para todos os ambientes da sua casa ou negócio.</p>
+  </div>
+  <div class="servicos-grid">
+
+    <div class="servico-card reveal">
+      <div class="servico-img-container">
+        <img class="servico-img img-cozinha" src="cozinha2.png" alt="Cozinha planejada">
+      </div>
+      <div class="servico-body">
+        
+        <h3>Cozinha Planejada</h3>
+        <p>Cozinhas funcionais e elegantes, projetadas para otimizar o espaço e facilitar o dia a dia. Armários, ilha, despensa e muito mais.</p>
+        <span class="servico-tag">Ver projetos →</span>
+      </div>
+    </div>
+
+    <div class="servico-card reveal" style="transition-delay:0.1s">
+      <div class="servico-img-container">
+        <img class="servico-img img-quarto" src="quarto.png" alt="Quarto planejado">
+      </div>
+      <div class="servico-body">
+        
+        <h3>Quartos & Closets</h3>
+        <p>Do dormitório infantil ao master suíte, criamos dormitórios com armários embutidos, closets e cabeceiras sob medida.</p>
+        <span class="servico-tag">Ver projetos →</span>
+      </div>
+    </div>
+
+    <div class="servico-card reveal" style="transition-delay:0.2s">
+      <div class="servico-img-container">
+        <img class="servico-img img-banheiro" src="banheiro.png" alt="Banheiro planejado">
+      </div>
+      <div class="servico-body">
+        
+        <h3>Banheiros & Lavabos</h3>
+        <p>Gabinetes, armários e nichos planejados em materiais resistentes à umidade, com acabamento impecável e design sofisticado.</p>
+        <span class="servico-tag">Ver projetos →</span>
+      </div>
+    </div>
+
+    <div class="servico-card reveal" style="transition-delay:0.3s">
+      <div class="servico-img-container">
+        <img class="servico-img img-sala" src="sala.png" alt="Sala planejada">
+      </div>
+      <div class="servico-body">
+        
+        <h3>Salas & Home Office</h3>
+        <p>Estantes, painéis, racks e bancadas de trabalho que combinam funcionalidade e estética para o seu ambiente de estar e trabalho.</p>
+        <span class="servico-tag">Ver projetos →</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="section-header">
+    <div class="section-tag">Galeria</div>
+    <h2 class="section-title">Nossos Projetos</h2>
+    <p class="section-subtitle">Cada projeto é único. Confira alguns dos trabalhos que transformaram ambientes em Santos e região.</p>
+  </div>
+  <div class="portfolio-grid">
+    <div class="p-item reveal">
+      <img src="cozinha2.png" alt="Cozinha moderna Santos">
+      <div class="p-overlay"><small>Cozinha</small><span>Apartamento Santos</span></div>
+    </div>
+    <div class="p-item reveal" style="transition-delay:0.1s">
+      <img src="closet.png" alt="Closet planejado">
+      <div class="p-overlay"><small>Closet</small><span>Casa Guarujá</span></div>
+    </div>
+    <div class="p-item reveal" style="transition-delay:0.15s">
+      <img src="quarto.png" alt="Quarto planejado">
+      <div class="p-overlay"><small>Quarto</small><span>Res. Gonzaga</span></div>
+    </div>
+    <div class="p-item reveal" style="transition-delay:0.2s">
+      <img src="banheiro.png" alt="Banheiro planejado">
+      <div class="p-overlay"><small>Banheiro</small><span>Apto São Vicente</span></div>
+    </div>
+    <div class="p-item reveal" style="transition-delay:0.25s">
+      <img src="sala.png" alt="Sala planejada">
+      <div class="p-overlay"><small>Sala</small><span>Cobertura Santos</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="diferenciais">
+  <div class="section-header centered">
+    <div class="section-tag">Por que nos escolher</div>
+    <h2 class="section-title">Nossos Diferenciais</h2>
+    <p class="section-subtitle">Mais do que móveis, entregamos experiência, qualidade e a certeza de que cada centímetro vale a pena.</p>
+  </div>
+  <div class="diferenciais-grid">
+    <div class="diferencial-item reveal"><span class="diferencial-icon">📐</span><h4>100% Sob Medida</h4><p>Cada móvel é projetado exclusivamente para o seu espaço, sem desperdício de área e com aproveitamento máximo.</p></div>
+    <div class="diferencial-item reveal" style="transition-delay:0.1s"><span class="diferencial-icon">🏆</span><h4>Materiais Premium</h4><p>Utilizamos MDF e ferragens de alta qualidade com garantia, assegurando durabilidade e acabamento superior.</p></div>
+    <div class="diferencial-item reveal" style="transition-delay:0.2s"><span class="diferencial-icon">📱</span><h4>Atendimento Ágil</h4><p>Resposta rápida via WhatsApp, orçamentos sem compromisso e acompanhamento em todas as etapas do projeto.</p></div>
+    <div class="diferencial-item reveal" style="transition-delay:0.3s"><span class="diferencial-icon">🔒</span><h4>Entrega Garantida</h4><p>Prazo de entrega comprometido contratualmente. Seu projeto pronto na data combinada, sem surpresas.</p></div>
+    <div class="diferencial-item reveal" style="transition-delay:0.4s"><span class="diferencial-icon">🌍</span><h4>Baixada Santista</h4><p>Atendemos Santos, Guarujá, São Vicente, Praia Grande e toda a região com visita técnica gratuita.</p></div>
+    <div class="diferencial-item reveal" style="transition-delay:0.5s"><span class="diferencial-icon">⭐</span><h4>Experiência Real</h4><p>Mais de 10 anos no mercado e centenas de famílias satisfeitas atestam a qualidade do nosso trabalho.</p></div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="section-header">
+    <div class="section-tag">Fale conosco</div>
+    <h2 class="section-title">Peça seu Orçamento</h2>
+    <p class="section-subtitle">Sem compromisso. Um especialista entra em contato para entender seu projeto e apresentar a melhor solução.</p>
+  </div>
+  <div class="contato-grid">
+    <div class="contact-info reveal">
+      <div class="contact-info-item">
+        <div class="contact-icon">📍</div>
+        <div><h5>Endereço</h5><p>Pça. Iguatemi Martins, 169 – Vila Nova<br>Santos – SP, 11013-350</p></div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">📞</div>
+        <div><h5>Telefone & WhatsApp</h5><p><a href="tel:+5513981338833">(13) 98133-8833</a></p></div>
+      </div>
+      <div class="contact-info-item">
+        <div>
+          <h5>Horário de Atendimento</h5>
+          <p>Segunda a Sexta: 8h às 18h<br>Sábado: 8h às 12h</p>
+        </div>
+      </div>
+      <a href="https://wa.me/5513981338833?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20sem%20compromisso." class="btn-whatsapp" target="_blank" rel="noopener" style="margin-top:0.5rem">
+        💬 Chamar no WhatsApp
+      </a>
+    </div>
+    <div class="contact-form reveal" style="transition-delay:0.15s">
+      <div class="form-row">
+        <div class="form-group"><label>Nome completo</label><input type="text" placeholder="Seu nome"></div>
+        <div class="form-group"><label>WhatsApp</label><input type="tel" placeholder="(13) 9 8133-8833"></div>
+      </div>
+      <div class="form-group">
+        <label>Serviço de interesse</label>
+        <select>
+          <option value="">Selecione um serviço...</option>
+          <option>Cozinha Planejada</option>
+          <option>Quarto / Closet</option>
+          <option>Banheiro / Lavabo</option>
+          <option>Sala / Home Office</option>
+          <option>Projeto Comercial</option>
+          <option>Outro ambiente</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Cidade</label><input type="text" placeholder="Ex: Santos, Guarujá, São Vicente..."></div>
+      <div class="form-group"><label>Mensagem (opcional)</label><textarea placeholder="Conte um pouco sobre seu projeto..."></textarea></div>
+      <button class="btn-whatsapp" onclick="sendFormWpp()">💬 Enviar via WhatsApp</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">JC Planejados</span>
+      <p>Marcenaria especializada em móveis sob medida em Santos e região da Baixada Santista. Qualidade, prazo e atendimento personalizado.</p>
+      <div class="socials">
+        <a href="https://wa.me/5513981338833" class="social-link" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+        <a href="tel:+5513981338833" class="social-link" aria-label="Telefone">📞</a>
+      </div>
+    </div>
+    <div>
+      <h6>Navegação</h6>
+      <ul>
+        <li><a href="#sobre">Sobre Nós</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#portfolio">Portfólio</a></li>
+        <li><a href="#diferenciais">Diferenciais</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Serviços</h6>
+      <ul>
+        <li><a href="#servicos">Cozinha Planejada</a></li>
+        <li><a href="#servicos">Quartos & Closets</a></li>
+        <li><a href="#servicos">Banheiros</a></li>
+        <li><a href="#servicos">Salas & Home Office</a></li>
+        <li><a href="#servicos">Comercial</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Contato</h6>
+      <ul>
+        <li><a href="tel:+5513981338833">(13) 98133-8833</a></li>
+        <li><a href="https://wa.me/5513981338833" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="#">Santos – SP</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 JC Planejados. Todos os direitos reservados.</p>
+    <p>Desenvolvido por Caio Cunha, Lucas Santos & Murilo Novaes · FATEC Baixada Santista</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/5513981338833?text=Olá!%20Gostaria%20de%20um%20orçamento." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco no WhatsApp">💬</a>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+  const burger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  burger.addEventListener('click', () => { burger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+  function closeMobile() { burger.classList.remove('open'); mobileMenu.classList.remove('open'); }
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } }); }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+  function sendFormWpp() {
+    const inputs = document.querySelectorAll('.contact-form input, .contact-form select, .contact-form textarea');
+    const nome = inputs[0].value || 'Não informado';
+    const fone = inputs[1].value || 'Não informado';
+    const servico = inputs[2].value || 'Não informado';
+    const cidade = inputs[3].value || 'Não informado';
+    const msg = inputs[4].value || '';
+    const text = `Olá! Gostaria de solicitar um orçamento.\n\n*Nome:* ${nome}\n*WhatsApp:* ${fone}\n*Serviço:* ${servico}\n*Cidade:* ${cidade}${msg ? `\n*Mensagem:* ${msg}` : ''}`;
+    window.open(`https://wa.me/5513981338833?text=${encodeURIComponent(text)}`, '_blank');
+  }
+</script>
+</body>
+</html>
